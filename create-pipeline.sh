@@ -46,7 +46,9 @@ fn_append_pipeline () {
          -e "s/TMP_ENV/${ENV_TYPE}/" \
           ${WF_TYPE}
      for var in $VARS; do 
-        echo $var | sed "s/\(.*\)=\(.*\)/  - name: \1\n    value: '\2'/" 
+#        echo $var | sed "s/\(.*\)=\(.*\)/  - name: \1\n    value: '\2'/" 
+         echo "  - name: ${var/%=*/}"
+         echo "    value: '${var/#*=/}'"
      done
   done  >> ${OUTPUT_DIR}/${PIPELINE}.yaml
 }
