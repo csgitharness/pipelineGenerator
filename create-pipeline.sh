@@ -93,20 +93,14 @@ fn_process_workflow() {
 }
 
 fn_process_input(){
-  approval=""
   while read input; do
     occ_type=`echo $input | sed "s/:.*//"`
     occ_apps=`echo $input | sed "s/^.*: //"`
-    if [ "$approval" != "" ]; then
-      fn_process_approval $occ_type  >> ${PIPELINE}
-    fi
     eval fn_process_${occ_type} $occ_apps  >> ${PIPELINE}
-    approval=$occ_type
   done
 }
 
-######### MAIN ###########
-
+########## MAIN #########
 
 fn_process_args $*
 fn_create_pipeline 
