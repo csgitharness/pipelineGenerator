@@ -19,10 +19,10 @@ fn_process_args(){
     exit 0
  fi
 
- fn_get_pipeline 
+ fn_set_pipeline 
 }
 
-fn_get_pipeline(){
+fn_set_pipeline(){
    ENV_TYPE=${INPUT_FILE%%.*}
    SUFFIX=`date '+%F'`
    PIPELINE=${RELEASE}-${ENV_TYPE}-${SUFFIX}.yaml
@@ -78,7 +78,7 @@ fn_process_webapp() {
   for app in $*; do
   sed -e "s/TMP_SVC_NAME/$app/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
-      -e "s/TMP_TYPE/webapp/" \
+      -e "s/TMP_TYPE/web/" \
      webapp.wf
   done
 }
