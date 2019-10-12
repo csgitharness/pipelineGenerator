@@ -105,6 +105,8 @@ fn_process_input(){
   done
 }
 
+######### MAIN ###########
+
 
 fn_process_args $*
 fn_create_pipeline 
