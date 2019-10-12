@@ -74,12 +74,12 @@ fn_process_config() {
   done
 }
 
-fn_process_webapp() {
+fn_process_web() {
   for app in $*; do
   sed -e "s/TMP_SVC_NAME/$app/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_TYPE/web/" \
-     webapp.wf
+     web.wf
   done
 }
 
