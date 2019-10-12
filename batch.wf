@@ -1,0 +1,22 @@
+- type: ENV_STATE
+  disable: false
+  name: deploy-TMP_SVC_NAME-TMP_TYPE-TMP_ENV
+  parallel: false
+  stageName: BATCH
+  workflowName: occ-template
+  workflowVariables:
+  - name: deploy_batch
+    value: 'Yes'
+  - name: deploy_config
+    value: 'No'
+  - name: deploy_web
+    value: 'No'
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: TMP_ENV
+  - entityType: SERVICE
+    name: Service
+    value: TMP_SVC_NAME
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: PDC-SSH-TMP_SVC_NAME
