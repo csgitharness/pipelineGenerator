@@ -1,0 +1,10 @@
+- type: APPROVAL
+  disable: false
+  name: TMP_TYPE-Approval
+  parallel: false
+  properties:
+    userGroups:
+    - ZqGajR3dQoifn7dypquklw
+    timeoutMillis: 604800000
+    approvalStateType: USER_GROUP
+  stageName: APPROVAL
