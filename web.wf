@@ -1,6 +1,6 @@
 - type: ENV_STATE
   disable: false
-  name: deploy-TMP_SVC_NAME-TMP_TYPE-TMP_ENV
+  name: TMP_SVC_NAME-TMP_ENV-TMP_TYPE
   parallel: false
   stageName: WEB
   workflowName: occ-template
