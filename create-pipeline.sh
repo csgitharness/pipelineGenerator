@@ -6,26 +6,14 @@ INPUT_FILE=""
 RELEASE=""
 IFS=,
 
-fn_process_args(){
- if [ $# -lt 2 ]; then
-   echo "Usage: create-pipeline.sh <release> <env>.txt"
-   exit 0
- fi
- RELEASE=$1
- INPUT_FILE=$2
- 
+fn_init_pipeline(){
+ RELEASE=${INPUT_FILE%%.*}
  if [ ! -f $INPUT_FILE ]; then
     echo "File $INPUT_FILE not found"
     exit 0
  fi
-
- fn_set_pipeline 
-}
-
-fn_set_pipeline(){
-   ENV_TYPE=${INPUT_FILE%%.*}
-   SUFFIX=`date '+%F'`
-   PIPELINE=${RELEASE}-${ENV_TYPE}-${SUFFIX}.yaml
+ SUFFIX=`date '+%F'`
+ PIPELINE=${RELEASE}-${SUFFIX}.yaml
 }
 
 
@@ -49,6 +37,9 @@ fn_append_pipeline () {
   cat $INPUT_FILE | xargs -L 1 | fn_process_input
 }
 
+fn_process_env() {
+ ENV_TYPE=$1
+}
 
 fn_process_approval() {
   sed -e "s/TMP_TYPE/$1/" \
@@ -102,7 +93,14 @@ fn_process_input(){
 
 ########## MAIN #########
 
-fn_process_args $*
+if [ $# -lt 1 ]; then
+   echo "Usage: create-pipeline.sh <release>.pl"
+   exit 0
+fi
+
+INPUT_FILE=$1
+
+fn_init_pipeline 
 fn_create_pipeline 
 fn_append_pipeline
 
