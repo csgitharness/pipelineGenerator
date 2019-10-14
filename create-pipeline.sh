@@ -16,6 +16,7 @@ fn_init_pipeline(){
  PIPELINE=${RELEASE}-${SUFFIX}.yaml
 }
 
+### Creates the pipeline header, standard four lines ####
 
 fn_create_pipeline () {
 
@@ -32,20 +33,26 @@ pipelineStages:
 _EOF_
 }
 
+### Updates the Pipeline based on the input file ###
+
 fn_append_pipeline () {
   echo "Appending to existing pipeline ${PIPELINE}"
   cat $INPUT_FILE | xargs -L 1 | fn_process_input
 }
 
+### Process the new environment variable, overrides what was previously set as input ###
 fn_process_env() {
  ENV_TYPE=$1
 }
 
+### Appends the Approval stage
 fn_process_approval() {
   sed -e "s/TMP_TYPE/$1/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
      approval.wf
 }
+
+### Appends the batch workflow 
 
 fn_process_batch() {
   for app in $*; do
@@ -56,6 +63,8 @@ fn_process_batch() {
   done
 }
 
+### Appends the Config workflow 
+
 fn_process_config() {
   for app in $*; do
   sed -e "s/TMP_SVC_NAME/$app/" \
@@ -64,6 +73,8 @@ fn_process_config() {
      config.wf
   done
 }
+
+### Appends the Web workflow
 
 fn_process_web() {
   for app in $*; do
@@ -74,6 +85,8 @@ fn_process_web() {
   done
 }
 
+#### Currently, not being used ####
+# Note: can be a optimization later 
 
 fn_process_workflow() {
   for app in $*; do
@@ -82,6 +95,11 @@ fn_process_workflow() {
      occ-workflow.wf
   done
 }
+
+## This function process the input file and appends it to the pipeline file to build the Pipeline YAML
+## Core function of the script
+## 106, Dynamically generates the function name and then generates the file, removes the need for a switch statement
+## Note: if additional input is provided which is not covered by the key words we have chosen, adding function process_NEWKEYWORD, will be body of func
 
 fn_process_input(){
   while read input; do
