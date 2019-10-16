@@ -5,7 +5,6 @@
   stageName: WEB
   workflowName: WORKFLOW_NAME
   workflowVariables:
-  - name: deploy_batch
   - entityType: ENVIRONMENT
     name: Environment
     value: TMP_ENV
