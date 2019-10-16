@@ -9,8 +9,6 @@
     value: TMP_YN
   - name: deploy_config
     value: TMP_YN
-  - name: deploy_web
-    value: TMP_YN
   - entityType: ENVIRONMENT
     name: Environment
     value: TMP_ENV

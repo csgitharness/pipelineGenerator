@@ -3,14 +3,9 @@
   name: TMP_SVC_NAME-TMP_ENV-TMP_TYPE
   parallel: false
   stageName: WEB
-  workflowName: occ-template
+  workflowName: WORKFLOW_NAME
   workflowVariables:
   - name: deploy_batch
-    value: 'Yes'
-  - name: deploy_config
-    value: 'No'
-  - name: deploy_web
-    value: 'No'
   - entityType: ENVIRONMENT
     name: Environment
     value: TMP_ENV
