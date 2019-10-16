@@ -2,8 +2,10 @@
 
 PIPELINE=""
 ENV_TYPE="Global"
+WORKFLOW_NAME=""
 INPUT_FILE=""
 RELEASE=""
+TMP_YN=""
 IFS=,
 
 fn_init_pipeline(){
@@ -59,6 +61,7 @@ fn_process_batch() {
   sed -e "s/TMP_SVC_NAME/$app/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_TYPE/batch/" \
+      -e "s/TMP_YN/${TMP_YN}" \
      batch.wf
   done
 }
@@ -70,6 +73,8 @@ fn_process_config() {
   sed -e "s/TMP_SVC_NAME/$app/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_TYPE/config/" \
+      -e "s/WORKFLOW_NAME/${WORKFLOW_NAME}"
+      -e "s/TMP_YN/${TMP_YN}" \
      config.wf
   done
 }
@@ -121,4 +126,3 @@ INPUT_FILE=$1
 fn_init_pipeline 
 fn_create_pipeline 
 fn_append_pipeline
-
