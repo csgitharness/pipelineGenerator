@@ -1,8 +1,6 @@
-env: Prod3
-batch: drive,qrm
-approval: config
-env: Global
-config: drive,utilities
-approval: web
-env: Prod3
-web: drive,arch
+agreements,Y,N,Y
+arch,Y,N,N
+rohan,N,N,Y
+ankita,Y,Y,Y
+umesh,Y,Y,N
+drive,Y,N,Y

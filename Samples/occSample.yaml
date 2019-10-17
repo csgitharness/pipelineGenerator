@@ -55,7 +55,7 @@ pipelineStages:
 - type: ENV_STATE
   disable: false
   name: 'deploy web'
-  parallel: false
+  parallel: true
   stageName: 'STAGE 3'
   workflowName: deploy-web-prod
   workflowVariables:
