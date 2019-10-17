@@ -36,9 +36,11 @@ _EOF_
 fn_append_pipeline () {
   echo "Appending to existing pipeline ${PIPELINE}"
   # Append zip workflows
+  TMP_PARALLEL=false
   cat $INPUT_FILE | xargs -L 1 | fn_process_input1
   fn_process_approval >> ${PIPELINE}
   # Append web workflows
+  TMP_PARALLEL=false
   cat $INPUT_FILE | xargs -L 1 | fn_process_input2
 }
 
@@ -66,14 +68,13 @@ fn_process_zip() {
 # Output web workflow
 
 fn_process_web() {
-  for app in $*; do
-    sed -e "s/TMP_SVC_NAME/$app/" \
+
+    sed -e "s/TMP_SVC_NAME/$1/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
       -e "s/TMP_TYPE/web/" \
-      web.wf
-    TMP_PARALLEL=true
-  done
+      web.wf  
+
 }
 
 # First pass to handle zip workflows
@@ -96,6 +97,7 @@ fn_process_input2(){
     isWeb=`fn_get_value $web`
     if [ $isWeb == yes ]; then
        fn_process_web $app >> ${PIPELINE}
+       TMP_PARALLEL=true
     fi
   done
 }
