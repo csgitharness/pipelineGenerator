@@ -11,6 +11,6 @@
   - entityType: SERVICE
     name: Service
     value: TMP_SVC_NAME-web
-  - entityType: INFRASTRUCTURE_VMAPPING
+  - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
-    value: TMP_SVC_NAME-TMP_ENV
+    value: TMP_SVC_NAME-web
