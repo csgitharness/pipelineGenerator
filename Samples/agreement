@@ -3,12 +3,12 @@
   name: TMP_SVC_NAME-TMP_ENV-TMP_TYPE
   parallel: false
   stageName: BATCH
-  workflowName: WORKFLOW_NAME
+  workflowName: deploy-zip-prod0
   workflowVariables:
   - name: deploy_batch
-    value: TMP_YN
+    value: yes
   - name: deploy_config
-    value: TMP_YN
+    value: yes
   - entityType: ENVIRONMENT
     name: Environment
     value: TMP_ENV
@@ -18,4 +18,3 @@
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
     value: PDC-SSH-TMP_SVC_NAME
-
