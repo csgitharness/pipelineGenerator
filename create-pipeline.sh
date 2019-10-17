@@ -35,14 +35,14 @@ _EOF_
 
 fn_append_pipeline () {
   echo "Appending to existing pipeline ${PIPELINE}"
+  # Append zip workflows
   cat $INPUT_FILE | xargs -L 1 | fn_process_input1
   fn_process_approval >> ${PIPELINE}
+  # Append web workflows
   cat $INPUT_FILE | xargs -L 1 | fn_process_input2
 }
 
-fn_process_env() {
- ENV_TYPE=$1
-}
+
 
 fn_process_approval() {
   sed -e "s/TMP_TYPE/$1/" \
@@ -50,24 +50,7 @@ fn_process_approval() {
      approval.wf
 }
 
-fn_process_batch() {
-  for app in $*; do
-  sed -e "s/TMP_SVC_NAME/$app/" \
-      -e "s/TMP_ENV/${ENV_TYPE}/" \
-      -e "s/TMP_TYPE/batch/" \
-     batch.wf
-  done
-}
-
-fn_process_config() {
-  for app in $*; do
-  sed -e "s/TMP_SVC_NAME/$app/" \
-      -e "s/TMP_ENV/${ENV_TYPE}/" \
-      -e "s/TMP_TYPE/config/" \
-     config.wf
-  done
-}
-
+# Output zip workflow
 
 fn_process_zip() {
   sed -e "s/TMP_SVC_NAME/$1/" \
@@ -80,6 +63,8 @@ fn_process_zip() {
     TMP_PARALLEL=true
 }
 
+# Output web workflow
+
 fn_process_web() {
   for app in $*; do
     sed -e "s/TMP_SVC_NAME/$app/" \
@@ -91,14 +76,7 @@ fn_process_web() {
   done
 }
 
-
-fn_process_workflow() {
-  for app in $*; do
-  sed -e "s/TMP_SVC_NAME/$app/" \
-      -e "s/TMP_ENV/${ENV_TYPE}/" \
-     o9cc-workflow.wf
-  done
-}
+# First pass to handle zip workflows
 
 fn_process_input1(){
   while read app batch config web; do
@@ -110,6 +88,8 @@ fn_process_input1(){
     fi
   done
 }
+
+# Second pass to handle web workflows
 
 fn_process_input2(){
   while read app batch config web; do
