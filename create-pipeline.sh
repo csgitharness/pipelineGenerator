@@ -62,7 +62,7 @@ fn_process_zip() {
       -e "s/TMP_BATCH_VALUE/${2}/" \
       -e "s/TMP_CONFIG_VALUE/${3}/" \
       zip.wf
-    TMP_PARALLEL=true
+   
 }
 
 # Output web workflow
@@ -86,6 +86,7 @@ fn_process_input1(){
    # isWeb=`fn_get_value $web`
     if [ $isBatch == yes -o $isConfig == yes ]; then
       fn_process_zip $app $isBatch $isConfig >> ${PIPELINE}
+      TMP_PARALLEL=true
     fi
   done
 }
