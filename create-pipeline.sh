@@ -6,6 +6,7 @@ INPUT_FILE=""
 RELEASE=""
 IFS=,
 TMP_PARALLEL=false
+INFRA_TYPE=""
 
 fn_init_pipeline(){
  RELEASE=${INPUT_FILE%%.*}
@@ -61,6 +62,7 @@ fn_process_zip() {
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
       -e "s/TMP_BATCH_VALUE/${2}/" \
       -e "s/TMP_CONFIG_VALUE/${3}/" \
+      -e "s/INFRA_TYPE/${INFRA_TYPE}/" \
       zip.wf
    
 }
@@ -131,6 +133,7 @@ fi
 
 INPUT_FILE=$1
 ENV_TYPE=$2
+INFRA_TYPE=$3
 
 fn_init_pipeline 
 fn_create_pipeline 
