@@ -26,6 +26,9 @@ The Format is based on this table:
 | arch | Y | N | N |
 | drive | Y | N | N |
 
+
+#### Sample Input File
+
 ```
 agreements,Y,N,Y
 arch,Y,N,N
