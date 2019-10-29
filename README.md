@@ -65,6 +65,102 @@ pl2019-2019-10-13.yaml
 
 The filename generated from the pipeline takes the file name, and appends the date it was created. This was done in order to prevent conflicting names from being created. In the example above, the filename is *pl2019* and the script appends the date created, in this case *2019-10-13*. 
 
+**Sample Pipeline YAML**
+
+```
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: Dynamic Pipeline pl2019-2019-10-17.yaml
+pipelineStages:
+- type: ENV_STATE
+  disable: false
+  name: agreements-tech-zip
+  parallel: false
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: yes
+  - name: deploy-config
+    value: no
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: tech
+  - entityType: SERVICE
+    name: Service
+    value: agreements
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: agreements-tech1
+- type: ENV_STATE
+  disable: false
+  name: arch-tech-zip
+  parallel: true
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: yes
+  - name: deploy-config
+    value: no
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: tech
+  - entityType: SERVICE
+    name: Service
+    value: arch
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: arch-tech1
+- type: ENV_STATE
+  disable: false
+  name: drive-tech-zip
+  parallel: true
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: yes
+  - name: deploy-config
+    value: no
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: tech
+  - entityType: SERVICE
+    name: Service
+    value: drive
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: drive-tech1
+- type: APPROVAL
+  disable: false
+  name: 'Approval'
+  parallel: false
+  properties:
+    userGroups:
+    - sF962ZRwSQO0YQKj6K8yWA
+    timeoutMillis: 259200000
+    approvalStateType: USER_GROUP
+    stageName: 'Stage 2'
+- type: ENV_STATE
+  disable: false
+  name: agreements-tech-web
+  parallel: false
+  stageName: 'WEB'
+  workflowName: deploy-web-prod
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: tech
+  - entityType: SERVICE
+    name: Service
+    value: agreements-web
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: agreements-web
+
+```
+
 3. Please add the script to Harness Application Git Repository. Under the Pipeline Folder in the Application of choice.
 
 ```
@@ -118,15 +214,69 @@ Please make sure the workflow is named properly and exists in Harness first.
 
 The web.wf file is the templated out Harness workflow YAML for a web service related workflow. We use this template and append the desired values when specific which web service is being deployed. We also pass the environment and service infrastructure into the file as well. 
 
+```
+- type: ENV_STATE
+  disable: false
+  name: TMP_SVC_NAME-TMP_ENV-TMP_TYPE
+  parallel: TMP_PARALLEL
+  stageName: 'WEB'
+  workflowName: deploy-web-prod
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: TMP_ENV
+  - entityType: SERVICE
+    name: Service
+    value: TMP_SVC_NAME-web
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: TMP_SVC_NAME-web
+```
+
+
 ### zip.wf 
 
 The zip.wf is a templated out Harness workflow YAML that is appended to a Pipeline.yaml file, similar to the web.wf. The zip.wf file recieves the passed Deploy Batch Value, the Deploy Config Value, the environment, and the service infrastructure value. These values are appended to the file and are compiled together to create a pipeline yaml that Harness can sync and display. 
+
+```
+- type: ENV_STATE
+  disable: false
+  name: TMP_SVC_NAME-TMP_ENV-TMP_TYPE
+  parallel: TMP_PARALLEL
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: TMP_BATCH_VALUE
+  - name: deploy-config
+    value: TMP_CONFIG_VALUE
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: TMP_ENV
+  - entityType: SERVICE
+    name: Service
+    value: TMP_SVC_NAME
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: TMP_SVC_NAME-INFRA_TYPE
+```
 
 ### approval.wf 
 
 The Approval Workflow is a templated Workflow step from a Harness Pipeline.yaml. The approval step is currently utilized after the zip files are deployed, the user will need to approve before deploying the web files. 
 
-
+```
+- type: APPROVAL
+  disable: false
+  name: 'Approval'
+  parallel: false
+  properties:
+    userGroups:
+    - sF962ZRwSQO0YQKj6K8yWA
+    timeoutMillis: 259200000
+    approvalStateType: USER_GROUP
+    stageName: 'Stage 2'
+```
 
 ---
 
