@@ -187,7 +187,9 @@ pipelineStages:
 
 **Note: If the Pipeline doesn't upload, please check the error icon, the red alarm, and view the error**
 
-#### Common Issues
+---
+
+## Common Issues
 
 1. The existing infrastructure doesn't exist in Harness
 
