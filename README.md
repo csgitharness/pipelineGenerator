@@ -6,6 +6,8 @@ This script was designed to Dynamically Generate Pipelines for OCC Encore2 Appli
 
 The Team originally wanted a pipeline generator so they wouldn't have to manually create the pipelines form scratch. With this script, the developer needs to provide a select set of inputs and based of these inputs we generate the pipeline
 
+---
+
 ## Architecture of the Generated Pipeline
 
 The OCC team will be deploying the deploy_zip workflow first which contains workflow variables to indicate deploy_batch or deploy_config. The script allows to pass the parameters "yes" or "no". The Third component is Web. If the user specifies yes to web, the corresponding web service will be added to the pipeline.
@@ -13,6 +15,8 @@ The OCC team will be deploying the deploy_zip workflow first which contains work
 ```
 [Zip1 - Zip2 - Zip3] - Approval - [Web1 - Web2 - Web3]
 ```
+
+---
 
 ## How to Use
 
@@ -107,6 +111,24 @@ Please make sure the environment is already configured within Harness. Most time
 Please make sure the workflow is named properly and exists in Harness first. 
 ```
 
+---
+## Deep Dive 
+
+### web.wf
+
+The web.wf file is the templated out Harness workflow YAML for a web service related workflow. We use this template and append the desired values when specific which web service is being deployed. We also pass the environment and service infrastructure into the file as well. 
+
+### zip.wf 
+
+The zip.wf is a templated out Harness workflow YAML that is appended to a Pipeline.yaml file, similar to the web.wf. The zip.wf file recieves the passed Deploy Batch Value, the Deploy Config Value, the environment, and the service infrastructure value. These values are appended to the file and are compiled together to create a pipeline yaml that Harness can sync and display. 
+
+### approval.wf 
+
+The Approval Workflow is a templated Workflow step from a Harness Pipeline.yaml. The approval step is currently utilized after the zip files are deployed, the user will need to approve before deploying the web files. 
+
+
+
+---
 
 ## Quick Start 
 
@@ -115,3 +137,5 @@ Please make sure the workflow is named properly and exists in Harness first.
 Creating new pipeline pl2019-2019-10-13.yaml
 Appending to existing pipeline pl2019-2019-10-13.yaml
 ```
+
+---
