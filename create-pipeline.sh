@@ -62,6 +62,7 @@ fn_process_zip() {
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_TYPE/zip/" \
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
+      -e "s/TMP_WORKFLOW_NAME_ZIP/${WORKFLOW_NAME_ZIP}/" \
       -e "s/TMP_BATCH_VALUE/${2}/" \
       -e "s/TMP_CONFIG_VALUE/${3}/" \
       -e "s/INFRA_TYPE/${INFRA_TYPE}/" \
@@ -76,6 +77,7 @@ fn_process_web() {
     sed -e "s/TMP_SVC_NAME/$1/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
+      -e "s/TMP_WORKFLOW_NAME_WEB/${WORKFLOW_NAME_WEB}/" \
       -e "s/TMP_TYPE/web/" \
       web.wf  
 
