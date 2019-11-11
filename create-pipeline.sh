@@ -7,6 +7,7 @@ RELEASE=""
 IFS=,
 TMP_PARALLEL=false
 INFRA_TYPE=""
+WORKFLOW_NAME=""
 
 fn_init_pipeline(){
  RELEASE=${INPUT_FILE%%.*}
