@@ -18,3 +18,4 @@
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
     value: TMP_SVC_NAME-INFRA_TYPE
+    
