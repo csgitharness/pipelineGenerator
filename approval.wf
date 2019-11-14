@@ -8,3 +8,4 @@
     timeoutMillis: 259200000
     approvalStateType: USER_GROUP
     stageName: 'Stage 2'
+    
