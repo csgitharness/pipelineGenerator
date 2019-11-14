@@ -7,8 +7,8 @@ RELEASE=""
 IFS=,
 TMP_PARALLEL=false
 INFRA_TYPE=""
-WORKFLOW_NAME_WEB=""
-WORKFLOW_NAME_ZIP=""
+WEB_WORKFLOW=""
+ZIP_WORKFLOW=""
 
 fn_init_pipeline(){
  RELEASE=${INPUT_FILE%%.*}
@@ -62,7 +62,7 @@ fn_process_zip() {
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_TYPE/zip/" \
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
-      -e "s/TMP_WORKFLOW_NAME_ZIP/${WORKFLOW_NAME_ZIP}/" \
+      -e "s/TMP_WORKFLOW_NAME_ZIP/${ZIP_WORKFLOW}/" \
       -e "s/TMP_BATCH_VALUE/${2}/" \
       -e "s/TMP_CONFIG_VALUE/${3}/" \
       -e "s/INFRA_TYPE/${INFRA_TYPE}/" \
@@ -77,8 +77,8 @@ fn_process_web() {
     sed -e "s/TMP_SVC_NAME/$1/" \
       -e "s/TMP_ENV/${ENV_TYPE}/" \
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
-      -e "s/TMP_WORKFLOW_NAME_WEB/${WORKFLOW_NAME_WEB}/" \
       -e "s/TMP_TYPE/web/" \
+      -e "s/TMP_WORKFLOW_NAME_WEB/${WEB_WORKFLOW}/" \
       web.wf  
 
 }
@@ -138,6 +138,8 @@ fi
 INPUT_FILE=$1
 ENV_TYPE=$2
 INFRA_TYPE=$3
+ZIP_WORKFLOW=$4
+WEB_WORKFLOW=$5
 
 fn_init_pipeline 
 fn_create_pipeline 
