@@ -46,7 +46,7 @@ drive,Y,N,N
 Example input for the script:
 
 ```
-./create-pipeline.sh pl2019.pl tech tech1
+./create-pipeline.sh pl2019.pl tech tech1 deploy_zip deploy_web
 ```
 
 The expected output:
@@ -58,6 +58,8 @@ Appending to existing pipeline pl2019-2019-10-13.yaml
 
 - In the above example, the first argument, *tech* represents the environment a developer wishes to deploy into. 
 - The second argument, *tech1* represents the service infrastructure mapping where the developer wishes to deploy. 
+- deploy_zip is the workflow name for zip
+- deploy_web is the workflow name for web
 
 ```
 pl2019-2019-10-13.yaml

@@ -1,13 +1,13 @@
 harnessApiVersion: '1.0'
 type: PIPELINE
-description: Dynamic Pipeline pl2019-2019-10-17.yaml
+description: Dynamic Pipeline pl2019-2019-11-04.yaml
 pipelineStages:
 - type: ENV_STATE
   disable: false
-  name: agreements-tech-zip
+  name: agreements-dev-zip
   parallel: false
   stageName: 'STAGE 1'
-  workflowName: deploy-zip-prod0
+  workflowName: deploy_zip
   workflowVariables:
   - name: deploy_batch
     value: yes
@@ -15,19 +15,19 @@ pipelineStages:
     value: no
   - entityType: ENVIRONMENT
     name: Environment
-    value: tech
+    value: dev
   - entityType: SERVICE
     name: Service
     value: agreements
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
-    value: agreements-tech1
+    value: agreements-dev5
 - type: ENV_STATE
   disable: false
-  name: arch-tech-zip
+  name: arch-dev-zip
   parallel: true
   stageName: 'STAGE 1'
-  workflowName: deploy-zip-prod0
+  workflowName:  deploy_zip
   workflowVariables:
   - name: deploy_batch
     value: yes
@@ -35,19 +35,19 @@ pipelineStages:
     value: no
   - entityType: ENVIRONMENT
     name: Environment
-    value: tech
+    value: dev
   - entityType: SERVICE
     name: Service
     value: arch
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
-    value: arch-tech1
+    value: arch-dev5
 - type: ENV_STATE
   disable: false
-  name: drive-tech-zip
+  name: drive-dev-zip
   parallel: true
   stageName: 'STAGE 1'
-  workflowName: deploy-zip-prod0
+  workflowName:  deploy_zip
   workflowVariables:
   - name: deploy_batch
     value: yes
@@ -55,13 +55,13 @@ pipelineStages:
     value: no
   - entityType: ENVIRONMENT
     name: Environment
-    value: tech
+    value: dev
   - entityType: SERVICE
     name: Service
     value: drive
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
-    value: drive-tech1
+    value: drive-dev5
 - type: APPROVAL
   disable: false
   name: 'Approval'
@@ -74,17 +74,33 @@ pipelineStages:
     stageName: 'Stage 2'
 - type: ENV_STATE
   disable: false
-  name: agreements-tech-web
+  name: agreements-dev-web
   parallel: false
   stageName: 'WEB'
-  workflowName: deploy-web-prod
+  workflowName: deploy-all-web
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
-    value: tech
+    value: dev
   - entityType: SERVICE
     name: Service
     value: agreements-web
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
     value: agreements-web
+- type: ENV_STATE
+  disable: false
+  name: drive-dev-web
+  parallel: true
+  stageName: 'WEB'
+  workflowName: deploy-all-web
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: dev
+  - entityType: SERVICE
+    name: Service
+    value: drive-web
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: drive-web
