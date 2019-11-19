@@ -1,21 +1,21 @@
 harnessApiVersion: '1.0'
 type: PIPELINE
-description: testing
+description: Dynamic Pipeline pl2019-2019-10-30.yaml
 pipelineStages:
 - type: ENV_STATE
   disable: false
-  name: 'deploy batch config'
+  name: agreements-tech-zip
   parallel: false
   stageName: 'STAGE 1'
   workflowName: deploy-zip-prod0
   workflowVariables:
   - name: deploy_batch
-    value: no
-  - name: deploy-config
     value: yes
+  - name: deploy-config
+    value: no
   - entityType: ENVIRONMENT
     name: Environment
-    value: Tech
+    value: tech
   - entityType: SERVICE
     name: Service
     value: agreements
@@ -24,47 +24,83 @@ pipelineStages:
     value: agreements-tech1
 - type: ENV_STATE
   disable: false
-  name: 'deploy arch'
+  name: arch-tech-zip
   parallel: true
   stageName: 'STAGE 1'
   workflowName: deploy-zip-prod0
   workflowVariables:
   - name: deploy_batch
-    value: no
-  - name: deploy-config
     value: yes
+  - name: deploy-config
+    value: no
   - entityType: ENVIRONMENT
     name: Environment
-    value: Tech
+    value: tech
   - entityType: SERVICE
     name: Service
     value: arch
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
     value: arch-tech1
+- type: ENV_STATE
+  disable: false
+  name: drive-tech-zip
+  parallel: true
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: yes
+  - name: deploy-config
+    value: no
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: tech
+  - entityType: SERVICE
+    name: Service
+    value: drive
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: drive-tech1
 - type: APPROVAL
   disable: false
-  name: 'Approval 2'
+  name: 'Approval'
   parallel: false
   properties:
     userGroups:
     - sF962ZRwSQO0YQKj6K8yWA
     timeoutMillis: 259200000
     approvalStateType: USER_GROUP
-    stageName: 'STAGE 2'
+    stageName: 'Stage 2'
 - type: ENV_STATE
   disable: false
-  name: 'deploy web'
+  name: agreements-tech-web
   parallel: false
-  stageName: 'STAGE 3'
+  stageName: 'WEB'
   workflowName: deploy-web-prod
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
-    value: Tech
+    value: tech
   - entityType: SERVICE
     name: Service
     value: agreements-web
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
     value: agreements-web
+- type: ENV_STATE
+  disable: false
+  name: drive-tech-web
+  parallel: true
+  stageName: 'WEB'
+  workflowName: deploy-web-prod
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: tech
+  - entityType: SERVICE
+    name: Service
+    value: drive-web
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: drive-web

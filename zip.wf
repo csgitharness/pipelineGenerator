@@ -2,16 +2,20 @@
   disable: false
   name: TMP_SVC_NAME-TMP_ENV-TMP_TYPE
   parallel: TMP_PARALLEL
-  stageName: 'WEB'
-  workflowName: TMP_WORKFLOW_NAME_WEB
+  stageName: 'STAGE 1'
+  workflowName: TMP_WORKFLOW_NAME_ZIP
   workflowVariables:
+  - name: deploy_batch
+    value: TMP_BATCH_VALUE
+  - name: deploy-config
+    value: TMP_CONFIG_VALUE
   - entityType: ENVIRONMENT
     name: Environment
     value: TMP_ENV
   - entityType: SERVICE
     name: Service
-    value: TMP_SVC_NAME-web
+    value: TMP_SVC_NAME
   - entityType: INFRASTRUCTURE_MAPPING
     name: ServiceInfra_SSH
-    value: TMP_SVC_NAME-web
+    value: TMP_SVC_NAME-INFRA_TYPE
     

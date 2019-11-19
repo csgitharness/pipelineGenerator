@@ -1,0 +1,70 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: testing
+pipelineStages:
+- type: ENV_STATE
+  disable: false
+  name: 'deploy batch config'
+  parallel: false
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: no
+  - name: deploy-config
+    value: yes
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: Tech
+  - entityType: SERVICE
+    name: Service
+    value: agreements
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: agreements-tech1
+- type: ENV_STATE
+  disable: false
+  name: 'deploy arch'
+  parallel: true
+  stageName: 'STAGE 1'
+  workflowName: deploy-zip-prod0
+  workflowVariables:
+  - name: deploy_batch
+    value: no
+  - name: deploy-config
+    value: yes
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: Tech
+  - entityType: SERVICE
+    name: Service
+    value: arch
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: arch-tech1
+- type: APPROVAL
+  disable: false
+  name: 'Approval 2'
+  parallel: false
+  properties:
+    userGroups:
+    - sF962ZRwSQO0YQKj6K8yWA
+    timeoutMillis: 259200000
+    approvalStateType: USER_GROUP
+    stageName: 'STAGE 2'
+- type: ENV_STATE
+  disable: false
+  name: 'deploy web'
+  parallel: true
+  stageName: 'STAGE 3'
+  workflowName: deploy-web-prod
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: Tech
+  - entityType: SERVICE
+    name: Service
+    value: agreements-web
+  - entityType: INFRASTRUCTURE_MAPPING
+    name: ServiceInfra_SSH
+    value: agreements-web
