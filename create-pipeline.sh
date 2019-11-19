@@ -90,6 +90,7 @@ fn_validate_input(){
    while IFS= read -r line
    do
      echo "Validating $line"
+     echo "TBD..."
    done
 }
 
