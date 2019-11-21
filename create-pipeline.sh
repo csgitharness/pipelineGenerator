@@ -44,6 +44,7 @@ fn_append_pipeline () {
   TMP_PARALLEL=false
   cat $INPUT_FILE | xargs -L 1 | fn_process_input1
   # Add approval
+  TMP_PARALLEL=false
   cat $INPUT_FILE | xargs -L 1 | fn_process_input2
   # Append web workflows
   TMP_PARALLEL=false
@@ -89,7 +90,7 @@ fn_process_web() {
 fn_validate_input(){
    while IFS= read -r line
    do
-     echo "Validating $line"
+     echo "TBD: Validating $line"
    done
 }
 
