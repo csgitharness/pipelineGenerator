@@ -7,7 +7,7 @@
   workflowVariables:
   - name: deploy_batch
     value: TMP_BATCH_VALUE
-  - name: deploy-config
+  - name: deploy_config
     value: TMP_CONFIG_VALUE
   - entityType: ENVIRONMENT
     name: Environment
@@ -15,7 +15,7 @@
   - entityType: SERVICE
     name: Service
     value: TMP_SVC_NAME
-  - entityType: INFRASTRUCTURE_MAPPING
-    name: ServiceInfra_SSH
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_SSH
     value: TMP_SVC_NAME-INFRA_TYPE
     

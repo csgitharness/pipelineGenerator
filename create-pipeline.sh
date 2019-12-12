@@ -82,6 +82,7 @@ fn_process_web() {
       -e "s/TMP_PARALLEL/${TMP_PARALLEL}/" \
       -e "s/TMP_TYPE/web/" \
       -e "s/TMP_WORKFLOW_NAME_WEB/${WEB_WORKFLOW}/" \
+      -e "s/INFRA_TYPE/${INFRA_TYPE}/" \
       web.wf  
 
 }
