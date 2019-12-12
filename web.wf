@@ -5,12 +5,16 @@
   stageName: 'WEB'
   workflowName: TMP_WORKFLOW_NAME_WEB
   workflowVariables:
+  - name: envName
+    value: INFRA_TYPE
   - entityType: ENVIRONMENT
     name: Environment
     value: TMP_ENV
   - entityType: SERVICE
     name: Service
     value: TMP_SVC_NAME-web
-  - entityType: INFRASTRUCTURE_MAPPING
-    name: ServiceInfra_SSH
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_SSH
     value: TMP_SVC_NAME-web
+
+    
