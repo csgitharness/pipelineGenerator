@@ -81,7 +81,7 @@ pipelineStages:
   name: agreements-tech-web
   parallel: false
   stageName: 'WEB'
-  workflowName: deploy_web
+  workflowName: RHEL
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
@@ -98,7 +98,7 @@ pipelineStages:
   name: drive-tech-web
   parallel: true
   stageName: 'WEB'
-  workflowName: deploy_web
+  workflowName: RHEL
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
