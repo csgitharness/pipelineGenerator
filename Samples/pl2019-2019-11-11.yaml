@@ -7,7 +7,7 @@ pipelineStages:
   name: agreements-tech-zip
   parallel: false
   stageName: 'STAGE 1'
-  workflowName: 
+  workflowName: deployzip
   workflowVariables:
   - name: deploy_batch
     value: yes
@@ -27,7 +27,7 @@ pipelineStages:
   name: arch-tech-zip
   parallel: true
   stageName: 'STAGE 1'
-  workflowName: 
+  workflowName: deployzip
   workflowVariables:
   - name: deploy_batch
     value: yes
@@ -47,7 +47,7 @@ pipelineStages:
   name: drive-tech-zip
   parallel: true
   stageName: 'STAGE 1'
-  workflowName: 
+  workflowName: deployzip
   workflowVariables:
   - name: deploy_batch
     value: yes
@@ -77,7 +77,7 @@ pipelineStages:
   name: agreements-tech-web
   parallel: false
   stageName: 'WEB'
-  workflowName: 
+  workflowName: deploydev
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
@@ -93,7 +93,7 @@ pipelineStages:
   name: drive-tech-web
   parallel: true
   stageName: 'WEB'
-  workflowName: 
+  workflowName: deploydev
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
